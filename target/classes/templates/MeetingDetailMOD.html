@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>	
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container" style="max-width: 750px; margin-top: 50px;">
+		<div class="well">
+			<form action="#" th:action="@{/Meetingdetail}" th:object="${meeting}" method="get">
+				<div class="form-group">
+					<label for="host">主持人</label> 
+					<input type="text" name="host" id="host" th:field="*{host.name}" class="form-control" disabled>
+				</div>
+				<div class="form-group">
+					<label for="discussItem">討論事項</label> 
+					<input type="text" name="discussItem" id="discussItem" th:field="*{discussItem}" class="form-control" disabled>
+				</div>
+				
+				<iframe id="iframe1" style="width: 650px;height: 500px;margin-top: 50px;" th:src="@{/JsGrid?meetingID={id}(id=${meeting.meetingID})}"> </iframe>	
+			
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">填報完成</button>
+				</div>
+				
+			</form>
+		</div>	
+	</div>
+	
+	<div align="center">
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+</body>
+</html>

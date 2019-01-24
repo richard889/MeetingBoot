@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+</head>
+<body>
+
+<div th:fragment="header">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" />
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Spring Boot</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/Emp}">員工資料</a></li>
+                    <li class="active"><a th:href="@{/Meeting}">發起會議</a></li>
+                    <li class="active"><a th:href="@{/Meetingdetail}">參與會議</a></li>
+                    <li class="active"><a th:href="@{/Meetingcount}">填報統計</a></li>
+                </ul>
+            </div>
+           
+        </div>
+    </nav>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container" style="max-width: 900px">
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>					
+					<th>會議室</th>
+					<th>主持人</th>
+					<th>討論事項</th>
+					<th>希望日期</th>
+					<th>開始時間</th>
+					<th>結束時間</th>
+					<th>次數</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="meetingcount, iterStat:${meetingcountList}" >
+					<td th:text="${meetingcount.meeting.room.roomName}">會議室</td>
+					<td th:text="${meetingcount.meeting.host.name}">主持人</td>
+					<td th:text="${meetingcount.meeting.discussItem}">討論事項</td>
+					<td th:text="${meetingcount.exceptDate}">希望日期</td>
+					<td th:text="${meetingcount.beginTime}">開始時間</td>
+					<td th:text="${meetingcount.endTime}">結束時間</td>
+					<td th:text="${meetingcount.allowNum}">次數</td>
+				</tr>
+			</tbody>			
+		
+		</table>
+	</div>
+
+	<div align="center">
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+</body>
+</html>

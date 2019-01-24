@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="container" style="max-width: 700px; margin-top: 50px;">
+		<div class="well">
+			<form action="#" th:action="@{/Emp/addSave}" th:object="${employee}" method="post">
+
+				<div class="form-group">
+					<label for="empNo">員工代號</label> 
+					<input type="text" name="empNo" id="empNo" th:field="*{empNo}" class="form-control">
+					<span style="color:red" th:if="${#fields.hasErrors('empNo')}" th:errors="*{empNo}">員工代號 Error</span>
+				</div>
+				<div class="form-group">
+					<label for="password">密碼</label> 
+					<input type="password" name="password" id="password" th:field="*{password}" class="form-control">
+					<span style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">密碼 Error</span>
+				</div>
+				<div class="form-group">
+					<label for="name">姓名</label> 
+					<input type="text" name="name" id="name" th:field="*{name}" class="form-control">
+					<span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">姓名 Error</span>
+				</div>				
+				<div class="form-group">
+					<label for="sex">性別</label> 
+					<input type="radio" name="sex" id="sexM" th:field="*{sex}" value="M" th:text="男"/>
+					<input type="radio" name="sex" id="sexF" th:field="*{sex}" value="F" th:text="女"/> 					
+					<span style="color:red" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">性別 Error</span>
+				</div>
+				<div class="form-group">
+					<label for="role">所屬角色</label> 
+					<input type="radio" name="role" id="role1" th:field="*{role}" value="1" th:text="管理者"/>
+					<input type="radio" name="role" id="role2" th:field="*{role}" value="2" th:text="使用者"/> 					
+					<span style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">所屬角色 Error</span>
+				</div>			
+				<div class="form-group">
+					<label for="dept">部門</label>
+					<select name="dept" id="dept" th:field="*{dept}" class="form-control selectpicker">
+						<option th:each="dept : ${deptList}" th:value="${dept.deptID}" th:text="${dept.deptName}"></option>
+					</select>
+				</div>							
+				<div class="form-group">
+					<label for="phone">電話</label> 
+					<input type="text" name="phone" id="phone" th:field="*{phone}" class="form-control">
+					<span style="color:red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">電話 Error</span>
+				</div>
+				<div class="form-group">
+					<label for="address">地址</label> 
+					<input type="text" name="address" id="address" th:field="*{address}" class="form-control">
+					<span style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">地址 Error</span>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label> 
+					<input type="text" name="email" id="email" th:field="*{email}" class="form-control">
+					<span style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+				</div>				
+				
+				<p class="text-center">
+					<button type="submit" class="btn btn-primary">提交</button>
+				</p>
+			</form>
+		</div>
+
+	</div>
+
+	<div align="center">
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+</body>
+</html>

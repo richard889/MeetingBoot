@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>加入會議參與者</title>
+      <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+      <link href="/css/bootstrap.min.css"  rel="stylesheet">
+      <link href="/css/bootstrap-theme.min.css"  rel="stylesheet">
+   </head>
+   <body>
+      <div class="container" style="width:500px;float: left;margin-left:10px">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h1 class="panel-title">加入會議參與者</h1>
+            </div>
+            <div class="panel-body">
+               <table id="table">
+                  <thead>
+                  <th><input type="checkbox" id="checkAll" title="Select all"/></th>
+                  <th>員工編號</th>
+                  <th>員工姓名</th>
+                  <th>Email</th>
+                  </thead>
+                  <tbody>                  
+                  </tbody>
+               </table>
+
+               <button class="btn btn-primary" id="getSelected" style="display:none">Get Selected</button>
+            </div>
+
+         </div>
+      </div>
+      <div id="desc" style="display:none;float:left;border-width:3px;border-style:dashed;border-color:#FFAC55;padding:5px;width:350px;height:500px">
+      </div>
+
+      <script src="/js/jquery-3.3.1.js"></script>
+      <script src="/js/bootstrap.min.js"></script>
+      <script src="/js/easyTable.js"></script>
+      
+      <script>
+         var foo = '';         
+         
+      	 $.ajax({
+     		type : "GET",
+     		url : "api/employee/all",
+     		success: function(result){
+     			$.each(result, function(i, employee){
+     				foo += '<tr><td><input type="checkbox"/></td><td>' + employee.empNo + '</td><td>' + employee.name + '</td><td>' + employee.email + '</td></tr>';
+     	        }); 
+     			
+     			$("#table").find('tbody').append(foo);
+     		},
+     		error : function(e) {
+     			alert("ERROR: ", e);
+     			console.log("ERROR: ", e);
+     		}
+     	 });
+      	          
+         var table = $("#table").easyTable();
+         $("#getSelected").click(function () {
+        	 var data = table.getSelected();
+        	 //$("#desc").html(data);
+        	 var json = $.parseJSON(data);
+        	 $(json).each(function(i,val){
+        	 	 var s = "";
+        	     $.each(val,function(k,v){
+        	    	 s +=  v + " ";
+        	 	 });
+        	     
+        	     $("#desc").append(s.trim() +　";\n");        	    
+        	 });           
+         });
+
+      </script>
+
+   </body>
+</html>

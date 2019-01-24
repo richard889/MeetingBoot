@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jsGrid - Basic Scenario</title>
+    <link rel="stylesheet" type="text/css" href="/css/jsgrid/jsgrid.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jsgrid/theme.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jsgrid/demos.css" />
+
+	<script src="/js/jquery.min.js"></script>
+    <script src="/js/jsgrid/db.js"></script>    
+    <script src="/js/jsgrid/jsgrid.core.js"></script>
+    <script src="/js/jsgrid/jsgrid.load-indicator.js"></script>
+    <script src="/js/jsgrid/jsgrid.load-strategies.js"></script>
+    <script src="/js/jsgrid/jsgrid.sort-strategies.js"></script>
+    <script src="/js/jsgrid/jsgrid.field.js"></script>
+    <script src="/js/jsgrid/fields/jsgrid.field.text.js"></script>
+    <script src="/js/jsgrid/fields/jsgrid.field.number.js"></script>
+    <script src="/js/jsgrid/fields/jsgrid.field.select.js"></script>
+    <script src="/js/jsgrid/fields/jsgrid.field.checkbox.js"></script>
+    <script src="/js/jsgrid/fields/jsgrid.field.control.js"></script>
+    
+	<link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<script src="/js/jquery.datetimepicker.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+	<div>參加時間填報</div>
+    <div id="jsGrid"></div>
+     
+    <script>
+        $(function() {
+        	var value = [[${param.meetingID}]];
+ 	        $.ajax({
+	        	url : "api/meetingdetail/meetingid",
+	        	data: {meetingID:value},
+	            method: "get",
+	            cache: false,
+	            contentType: "application/json",
+	            success: function(result){
+	            	var selected = [];  	
+	            	$.each(result, function(i, detail){
+	            		var obj = new Object;
+	            		obj.id = detail.id;
+	            		obj.empNo = detail.employee.empNo;
+	            		obj.exceptDate = detail.exceptDate;
+	                	obj.beginTime = detail.beginTime;
+	                	obj.endTime = detail.endTime;
+	                	selected = selected.concat(obj);	
+	            	});
+	            	db.data = JSON.stringify(selected);
+	            	db.meetingID = value;
+	            	ShowGrid();	            	
+	            },
+	     		error : function(e) {
+	     			alert("ERROR: ", e);
+	     			console.log("ERROR: ", e);
+	     		}
+	        });
+                        
+            function ShowGrid(){
+                $("#jsGrid").jsGrid({
+                    height: "90%",
+                    width: "100%",
+                    filtering: false,
+                    editing: true,                   
+                    inserting: false,
+                    sorting: false,
+                    paging: false,
+                    autoload: true,
+                    pageSize: 15,
+                    pageButtonCount: 5,
+                    deleteConfirm: "Do you really want to delete the client?",
+                    controller: db,
+                    fields: [
+                    	{ name: "empNo", type: "text", width: 50, title: "員工編號" },
+                        { name: "exceptDate", type: "text", width: 50, title: "希望日期" },
+                        { name: "beginTime", type: "text", width: 50, title: "開始時間" },
+                        { name: "endTime", type: "text", width: 50, title: "結束時間" },
+                        { type: "control" }
+                    ]
+                });
+            }           
+			
+        });
+    </script>    
+    
+</body>
+</html>
