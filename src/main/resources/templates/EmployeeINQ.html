@@ -34,7 +34,7 @@
 					<td th:text="${emp.email}">Email</td>									
 	                <td>
 	                    <a th:href="@{/Emp/{id}/mod(id=${emp.empID})}" >更新</a>
-	                    <a th:href="@{/Emp/{id}/delete(id=${emp.empID})}" >刪除</a>
+	                    <a class="btnDelete" th:href="@{/Emp/{id}/delete(id=${emp.empID})}" >刪除</a>
 	                </td>
 				</tr>
 			</tbody>			
@@ -45,5 +45,17 @@
 	<div align="center">
 		<div th:replace="fragments/footer :: footer"></div>
 	</div>
+	
+	<script type="text/javascript">	
+	    $(document).ready(function(){
+	    	$(".btnDelete").click(function(){
+	    		if(confirm("是否確定刪除？")){
+					return true;
+				}
+				return false;
+			})
+	    });
+	</script>	
+	
 </body>
 </html>

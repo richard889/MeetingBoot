@@ -44,8 +44,8 @@ public class LoginController {
     
     @GetMapping("/Logout")
     public String logout(HttpSession session) {
-    	session.removeAttribute("loginuser"); 
-    	return "Login"; 
+    	session.removeAttribute("LoginUser"); 
+    	return "redirect:/Login";
     }
     
     

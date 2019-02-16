@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.MeetingBoot.Service.BookCategoryRepository;
 import com.MeetingBoot.Service.EmployeeService;
 import com.MeetingBoot.Service.MeetingService;
 import com.MeetingBoot.Service.MeetingdetailService;
-import com.MeetingBoot.entity.Book;
-import com.MeetingBoot.entity.BookCategory;
 import com.MeetingBoot.entity.Employee;
 import com.MeetingBoot.entity.Meeting;
 import com.MeetingBoot.entity.Meetingdetail;
@@ -40,9 +37,6 @@ public class RestAPIs {
 	@Autowired
 	private EmployeeService empService;
 	
-	@Autowired
-	private BookCategoryRepository bookCategoryRepository;
-
 	@GetMapping(value = "/api/employee/all")
 	public List<Employee> getEmployeeAll() {
 		List<Employee> empList = empService.findAll();

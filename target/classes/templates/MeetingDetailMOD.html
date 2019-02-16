@@ -15,6 +15,12 @@
 					<label for="host">主持人</label> 
 					<input type="text" name="host" id="host" th:field="*{host.name}" class="form-control" disabled>
 				</div>
+				<div class="form-inline">
+					<label for="beginDate">會議日期區間</label><br> 
+					<input type="text" name="beginDate" id="beginDate" th:field="*{beginDate}" style="width:120px" class="form-control" disabled> ~
+					<input type="text" name="endDate" id="endDate" th:field="*{endDate}" style="width:120px" class="form-control" disabled>
+					<p>
+				</div>
 				<div class="form-group">
 					<label for="discussItem">討論事項</label> 
 					<input type="text" name="discussItem" id="discussItem" th:field="*{discussItem}" class="form-control" disabled>
