@@ -42,11 +42,11 @@ public class Meeting implements Serializable{
 	//@LastModifiedDate
 	private Date updateDate;
 		
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name = "hostID")
 	private Employee host;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name = "roomID")
 	private Room room;
 

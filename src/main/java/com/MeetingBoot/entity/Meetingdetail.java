@@ -35,7 +35,7 @@ public class Meetingdetail implements Serializable{
 	private long updatePID;
 	private Date updateDate;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name = "empID")
 	private Employee employee;
 	

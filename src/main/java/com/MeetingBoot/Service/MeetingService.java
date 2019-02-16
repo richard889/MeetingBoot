@@ -25,8 +25,9 @@ public class MeetingService {
 		return meetingRepository.save(meeting);
 	}	
 
-	public void delete(long meetingID) {
-		meetingRepository.deleteById(meetingID);
+	public void delete(long findOne) {
+		Meeting meeting = this.findOne(findOne);
+		meetingRepository.delete(meeting);
 	}
 	
 }

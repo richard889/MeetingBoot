@@ -45,7 +45,7 @@ public class Employee {
 	private long updatePID;
 	private Date updateDate;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name = "deptID")
 	private Department dept;
 	
