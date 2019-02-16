@@ -63,8 +63,8 @@
 			var btnSure = $('#iframe1').contents().find('#getSelected');
 			btnSure.click();
 			var desc = $('#iframe1').contents().find('#desc').text();
-			desc = desc.trim() + "<br/>";
-			$('#participant').append(desc);
+			desc = $("#participant").val() + desc.trim()  + "\r\n";
+			$('#participant').val(desc);
 			$('#iframe1').contents().find('#desc').html("");
 	    })
 	    
