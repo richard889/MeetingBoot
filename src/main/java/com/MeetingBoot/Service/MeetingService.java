@@ -20,7 +20,7 @@ public class MeetingService {
 	public Meeting findOne(long meetingID) {
 		return meetingRepository.findById(meetingID).get();
 	}
-	
+
 	public Meeting save(Meeting meeting) {
 		return meetingRepository.save(meeting);
 	}	

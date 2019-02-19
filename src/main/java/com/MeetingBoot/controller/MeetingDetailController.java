@@ -40,8 +40,16 @@ public class MeetingDetailController {
 	private EmployeeService employeeService;	
 	
 	@GetMapping("/Meetingdetail")
-	public String getAll(Model model) {
+	public String getAll(Model model, @SessionAttribute("LoginUser") Employee loginUser) {
 		List<Meeting> meetingList = meetingService.findAll();
+		if (!"1".equals(loginUser.getRole())) {
+		    meetingList = meetingList.stream()
+			.filter(meeting -> (
+				(meeting.getMeetingdetails().stream().map(Meetingdetail::getEmployee).collect(Collectors.toList())).stream()
+				.map(Employee::getEmpNo).collect(Collectors.toList()).contains(loginUser.getEmpNo())))	
+			.collect(Collectors.toList());
+		}
+		
 		model.addAttribute("meetingList", meetingList);
 		return "MeetingDetailINQ";
 	}

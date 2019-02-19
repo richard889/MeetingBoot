@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -43,8 +44,16 @@ public class MeetingController {
 	private EmployeeService employeeService;	
 
 	@GetMapping("/Meeting")
-	public String getAll(Model model) {
+	public String getAll(Model model, @SessionAttribute("LoginUser") Employee loginUser) {
 		List<Meeting> meetingList = meetingService.findAll();
+		if (!"1".equals(loginUser.getRole())) {
+		    meetingList = meetingList.stream()
+			.filter(meeting -> (
+				(meeting.getMeetingdetails().stream().map(Meetingdetail::getEmployee).collect(Collectors.toList())).stream()
+				.map(Employee::getEmpNo).collect(Collectors.toList()).contains(loginUser.getEmpNo())))	
+			.collect(Collectors.toList());
+		}
+		
 		model.addAttribute("meetingList", meetingList);
 		return "MeetingINQ";
 	}
